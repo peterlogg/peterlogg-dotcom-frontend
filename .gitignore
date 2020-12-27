@@ -10,6 +10,7 @@
 
 # production
 /build
+/elm-stuff
 
 # misc
 .DS_Store

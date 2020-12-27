@@ -195,7 +195,7 @@ yourFeed cred =
 
 globalFeed : ( String, Msg )
 globalFeed =
-    ( "Global Feed", ClickedTab GlobalFeed )
+    ( "Global Feel", ClickedTab GlobalFeed )
 
 
 tagFeed : Tag -> ( String, Msg )
