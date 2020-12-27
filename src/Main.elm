@@ -1,7 +1,6 @@
 module Main exposing (main)
 
 import Api exposing (Cred)
-import Article.Slug exposing (Slug)
 import Avatar exposing (Avatar)
 import Browser exposing (Document)
 import Browser.Navigation as Nav
