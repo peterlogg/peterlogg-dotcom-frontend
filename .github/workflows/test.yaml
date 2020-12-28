@@ -17,8 +17,8 @@ jobs:
           # Version of Elm to use. E.g. 0.19.1
           elm-version: 0.19.1
 
-      - name: install npm dependencies
+      - name: Install npm dependencies
         run: npm install
 
       - name: Test
-        run: ./node_modules/elm-app/bin/elm-app test
+        run: ./node_modules/elm-test/bin/elm-test
