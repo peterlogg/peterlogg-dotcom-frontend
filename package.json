@@ -1,0 +1,27 @@
+{
+  "name": "peterlogg-dotcom-frontend",
+  "version": "1.0.0",
+  "description": "Frontend application, written in Elm + deployed to Google Cloud Run. Template has been copied from Richard Feldman's [example](https://github.com/rtfeldman/elm-spa-example).",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "create-elm-app": "^5.22.0",
+    "elm-test": "^0.19.1-revision4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterlogg/peterlogg-dotcom-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peterlogg/peterlogg-dotcom-frontend/issues"
+  },
+  "homepage": "https://github.com/peterlogg/peterlogg-dotcom-frontend#readme"
+}
