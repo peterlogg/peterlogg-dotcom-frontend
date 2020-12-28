@@ -21,4 +21,4 @@ jobs:
         run: npm install
 
       - name: Test
-        run: ./node_modules/elm-test/bin/elm-app test
+        run: ./node_modules/elm-app/bin/elm-app test
