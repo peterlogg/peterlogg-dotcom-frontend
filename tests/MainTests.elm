@@ -1,10 +1,13 @@
 module MainTests exposing (suite)
 
-import Expect exposing (Expectation)
+import Expect exposing (Expectation, equal)
 import Fuzz exposing (Fuzzer, int, list, string)
+import Main exposing (stingAddress)
+import String exposing (startsWith)
 import Test exposing (..)
 
 
 suite : Test
 suite =
-    todo "Implement our first test. See https://package.elm-lang.org/packages/elm-explorations/test/latest for how to do this!"
+    test "stingAddress is a url"
+        (\_ -> Expect.true "Is a url, at the start at least" (startsWith "http" stingAddress))

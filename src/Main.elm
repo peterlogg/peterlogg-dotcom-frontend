@@ -1,4 +1,4 @@
-module Main exposing (Model, Msg(..), init, main, update, view)
+module Main exposing (Model, Msg(..), init, main, stingAddress, update, view)
 
 import Browser
 import Html exposing (Attribute, Html, div, img, input, text)
