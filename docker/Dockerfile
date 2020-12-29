@@ -4,10 +4,12 @@ FROM codesimple/elm:0.19 AS elm-build
 WORKDIR /usr/local/elm_app
 COPY . .
 
-# RUN apk update && \
-# apk add --no-cache npm
-# RUN npm install -g elm elm-test --unsafe-perm=true
-# RUN elm-test
+RUN pwd
+RUN ls
+RUN apk update && \
+    apk add --no-cache npm
+RUN npm install -g elm elm-test --unsafe-perm=true
+RUN elm-test
 RUN elm make ./src/Main.elm --output ./build/index.html --optimize
 
 ############ Application Build ################
