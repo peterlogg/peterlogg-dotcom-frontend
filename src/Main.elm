@@ -55,7 +55,7 @@ stingAddress =
 view : Model -> Html Msg
 view model =
     div []
-        [ input [ placeholder "Search for an image here", value model.content, onInput Change ] []
+        [ input [ placeholder "Do you like Sting?", value model.content, onInput Change ] []
         , div [] [ text (String.reverse model.content) ]
         , img [ src stingAddress ] []
         ]
