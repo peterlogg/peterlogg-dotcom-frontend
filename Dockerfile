@@ -18,7 +18,7 @@ FROM nginx:alpine
 LABEL maintainer="loggpeter@gmail.com"
 
 COPY --from=elm-build /usr/local/elm_app/build/index.html /usr/share/nginx/html/
-COPY docker/nginx.conf /etc/nginx/conf.d/configfile.template
+COPY nginx.conf /etc/nginx/conf.d/configfile.template
 
 ENV PORT 8080
 ENV HOST 0.0.0.0
