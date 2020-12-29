@@ -1,0 +1,11 @@
+Dockerfile
+makefile
+docker-compose*.yml
+*sonar*
+.git*
+.dockerignore
+.scannerwork
+.github
+.vscode
+README.md
+.env*
