@@ -11,6 +11,7 @@
 # production
 /build
 /elm-stuff
+/public
 
 # misc
 .DS_Store
