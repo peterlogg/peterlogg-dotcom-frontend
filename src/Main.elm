@@ -12,8 +12,14 @@ import Http
 -- MAIN
 
 
+main : Program () Model Msg
 main =
-    Browser.sandbox { init = init, update = update, view = view }
+    Browser.element
+        { init = \_ -> init
+        , view = view
+        , update = update
+        , subscriptions = \_ -> Sub.none
+        }
 
 
 
@@ -26,11 +32,13 @@ type alias Model =
     }
 
 
-init : Model
+init : ( Model, Cmd Msg )
 init =
-    { content = ""
-    , response = ""
-    }
+    ( { content = ""
+      , response = ""
+      }
+    , Cmd.none
+    )
 
 
 
@@ -65,37 +73,32 @@ getImageUrl =
         }
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Change newContent ->
-            { model | content = newContent }
+            ( { model | content = newContent }, Cmd.none )
 
         SendHttpRequest ->
             let
                 _ =
                     Debug.log logTag "Sending HTTP request"
-
-                _ =
-                    getImageUrl
             in
-            model
+            ( model, getImageUrl )
 
-        GotText response ->
-            case response of
-                Ok someString ->
-                    let
-                        _ =
-                            Debug.log logTag "Got" ++ someString
-                    in
-                    model
+        GotText (Ok someString) ->
+            let
+                _ =
+                    Debug.log logTag ("Got" ++ someString)
+            in
+            ( model, Cmd.none )
 
-                Err httpError ->
-                    let
-                        _ =
-                            Debug.log logTag "Hit a error"
-                    in
-                    model
+        GotText (Err httpError) ->
+            let
+                _ =
+                    Debug.log logTag "Hit a error bruvva"
+            in
+            ( model, Cmd.none )
 
 
 

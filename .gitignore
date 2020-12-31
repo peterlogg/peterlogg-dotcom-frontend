@@ -12,6 +12,7 @@
 /build
 /elm-stuff
 /public
+index.html
 
 # misc
 .DS_Store
