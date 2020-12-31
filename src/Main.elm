@@ -48,23 +48,54 @@ backendUrl =
     "https://elm-lang.org/assets/public-opinion.txt"
 
 
+logTag : String
+logTag =
+    "TAGGA"
+
+
 getImageUrl : Cmd Msg
 getImageUrl =
+    let
+        _ =
+            Debug.log logTag "I'm in this function mate"
+    in
     Http.get
         { url = backendUrl
         , expect = Http.expectString GotText
         }
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         Change newContent ->
-            ( { model | content = newContent }, Cmd.none )
+            { model | content = newContent }
 
         SendHttpRequest ->
-            Debug.log "I got clicked"
-                ( model, Cmd.none )
+            let
+                _ =
+                    Debug.log logTag "Sending HTTP request"
+
+                _ =
+                    getImageUrl
+            in
+            model
+
+        GotText response ->
+            case response of
+                Ok someString ->
+                    let
+                        _ =
+                            Debug.log logTag "Got" ++ someString
+                    in
+                    model
+
+                Err httpError ->
+                    let
+                        _ =
+                            Debug.log logTag "Hit a error"
+                    in
+                    model
 
 
 
@@ -84,3 +115,8 @@ view model =
         , div [] [ text (String.reverse model.content) ]
         , img [ src stingAddress ] []
         ]
+
+
+
+-- button : List (Attribute msg) -> List (Html msg) -> Html msg
+-- input : List (Attribute msg) -> List (Html msg) -> Html msg
