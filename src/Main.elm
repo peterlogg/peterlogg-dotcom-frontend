@@ -57,12 +57,6 @@ type Msg
     | GotText (Result Http.Error String)
 
 
-
--- backendUrl : String
--- backendUrl =
---     "https://peterlogg-dotcom-backend-2pyyxhy7da-ew.a.run.app"
-
-
 logTag : String
 logTag =
     "TAGGA"
