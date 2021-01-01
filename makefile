@@ -1,14 +1,11 @@
-.PHONY: build
+.PHONY: build start_dev start clean
 
-public/index.html: src/Main.elm
-	elm-app make $< --output $@ --optimize
-
-build/.build: public/index.html
+build:
 	elm-app build
 	touch $@
 
 start_dev: src/Main.elm
-	elm-live $< --open
+	elm-live $<
 
 start: build/.build
 	elm-app start

@@ -12,10 +12,10 @@ import Http
 -- MAIN
 
 
-main : Program () Model Msg
+main : Program Flags Model Msg
 main =
     Browser.element
-        { init = \_ -> init
+        { init = init
         , view = view
         , update = update
         , subscriptions = \_ -> Sub.none
@@ -29,13 +29,19 @@ main =
 type alias Model =
     { content : String
     , response : String
+    , backendUrl : String
     }
 
 
-init : ( Model, Cmd Msg )
-init =
+type alias Flags =
+    { environment : String, backendUrl : String }
+
+
+init : Flags -> ( Model, Cmd Msg )
+init flags =
     ( { content = ""
       , response = ""
+      , backendUrl = flags.backendUrl
       }
     , Cmd.none
     )
@@ -51,9 +57,10 @@ type Msg
     | GotText (Result Http.Error String)
 
 
-backendUrl : String
-backendUrl =
-    "https://elm-lang.org/assets/public-opinion.txt"
+
+-- backendUrl : String
+-- backendUrl =
+--     "https://peterlogg-dotcom-backend-2pyyxhy7da-ew.a.run.app"
 
 
 logTag : String
@@ -61,12 +68,8 @@ logTag =
     "TAGGA"
 
 
-getImageUrl : Cmd Msg
-getImageUrl =
-    let
-        _ =
-            Debug.log logTag "I'm in this function mate"
-    in
+getImageUrl : String -> Cmd Msg
+getImageUrl backendUrl =
     Http.get
         { url = backendUrl
         , expect = Http.expectString GotText
@@ -84,7 +87,7 @@ update msg model =
                 _ =
                     Debug.log logTag "Sending HTTP request"
             in
-            ( model, getImageUrl )
+            ( model, getImageUrl model.backendUrl )
 
         GotText (Ok someString) ->
             let

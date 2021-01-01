@@ -8,16 +8,16 @@ RUN pwd
 RUN ls
 RUN apk update && \
     apk add --no-cache npm
-RUN npm install -g elm elm-test --unsafe-perm=true
+RUN npm install -g elm elm-test create-elm-app --unsafe-perm=true
 RUN elm-test
-RUN elm make ./src/Main.elm --output ./build/index.html --optimize
+RUN elm make ./src/Main.elm --output ./build/index.html
 
 ############ Application Build ################
 FROM nginx:alpine
 
 LABEL maintainer="loggpeter@gmail.com"
 
-COPY --from=elm-build /usr/local/elm_app/build/index.html /usr/share/nginx/html/
+COPY --from=elm-build /usr/local/elm_app/build/ /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/configfile.template
 
 ENV PORT 8080

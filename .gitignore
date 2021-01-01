@@ -9,10 +9,9 @@
 /coverage
 
 # production
+.env
 /build
 /elm-stuff
-/public
-index.html
 
 # misc
 .DS_Store
