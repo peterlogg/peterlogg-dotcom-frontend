@@ -6,6 +6,8 @@ import Html exposing (Attribute, Html, button, div, img, input, pre, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
 import Http
+import Random
+import String
 
 
 
@@ -70,6 +72,21 @@ getImageUrl backendUrl =
         }
 
 
+randomSubString : String -> String
+randomSubString s =
+    let
+        startPosition =
+            1
+
+        -- Random.int 1 (String.length s)
+        endPosition =
+            10
+
+        -- Random.int (Random.generate startPosition) (String.length s)
+    in
+    String.slice startPosition endPosition s
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -77,24 +94,12 @@ update msg model =
             ( { model | content = newContent }, Cmd.none )
 
         SendHttpRequest ->
-            let
-                _ =
-                    Debug.log logTag "Sending HTTP request"
-            in
             ( model, getImageUrl model.backendUrl )
 
         GotText (Ok someString) ->
-            let
-                _ =
-                    Debug.log logTag ("Got" ++ someString)
-            in
-            ( model, Cmd.none )
+            ( { model | content = randomSubString someString }, Cmd.none )
 
         GotText (Err httpError) ->
-            let
-                _ =
-                    Debug.log logTag "Hit a error bruvva"
-            in
             ( model, Cmd.none )
 
 
@@ -115,8 +120,3 @@ view model =
         , div [] [ text (String.reverse model.content) ]
         , img [ src stingAddress ] []
         ]
-
-
-
--- button : List (Attribute msg) -> List (Html msg) -> Html msg
--- input : List (Attribute msg) -> List (Html msg) -> Html msg

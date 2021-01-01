@@ -4,6 +4,7 @@ import './main.css';
 import { Elm } from './Main.elm';
 import * as serviceWorker from './serviceWorker';
 
+// new webpack.EnvironmentPlugin(['ELM_APP_BACKEND_URL']);
 
 console.log(process.env)
 const app = Elm.Main.init({
