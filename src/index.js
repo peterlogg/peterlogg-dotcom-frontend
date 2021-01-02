@@ -1,10 +1,8 @@
 // index.js
 import './main.css';
-// import { config } from 'dotenv';
 import { Elm } from './Main.elm';
 import * as serviceWorker from './serviceWorker';
 
-console.log(process.env)
 const app = Elm.Main.init({
   node: document.getElementById('root'),
   flags: {
