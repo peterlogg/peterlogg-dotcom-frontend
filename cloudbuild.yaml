@@ -5,6 +5,8 @@ steps:
       - "--no-cache"
       - "-t"
       - "$_GCR_HOSTNAME/$PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA"
+      - "--build-arg"
+      - "ELM_APP_BACKEND_URL=${_ELM_APP_BACKEND_URL}"
       - .
       - "-f"
       - Dockerfile
@@ -23,7 +25,7 @@ steps:
       - "--platform=managed"
       - "--image=$_GCR_HOSTNAME/$PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA"
       - >-
-        --labels=managed-by=gcp-cloud-build-deploy-cloud-run,commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID,gcb-trigger-id=$_TRIGGER_ID,$_LABELS
+        --labels=managed-by=gcp-cloud-build-deploy-cloud-run,commit-sha=$COMMIT_SHA,gcb-build-id=$BUILD_ID
       - "--region=$_DEPLOY_REGION"
       - "--quiet"
     id: Deploy
@@ -32,6 +34,13 @@ images:
   - "$_GCR_HOSTNAME/$PROJECT_ID/$_REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA"
 options:
   substitutionOption: ALLOW_LOOSE
+substitutions:
+  _ELM_APP_BACKEND_URL: $ELM_APP_BACKEND_URL
+  _GCR_HOSTNAME: eu.gcr.io
+  _PLATFORM: managed
+  _SERVICE_NAME: peterlogg-dotcom-frontend
+  _DEPLOY_REGION: europe-west1
+  _REPO_NAME: peterlogg-dotcom-frontend
 tags:
   - gcp-cloud-build-deploy-cloud-run
   - gcp-cloud-build-deploy-cloud-run-managed

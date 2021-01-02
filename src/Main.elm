@@ -36,7 +36,7 @@ type alias Model =
 
 
 type alias Flags =
-    { environment : String, backendUrl : String }
+    { backendUrl : String }
 
 
 init : Flags -> ( Model, Cmd Msg )
